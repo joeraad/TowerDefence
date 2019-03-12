@@ -1,13 +1,12 @@
+﻿using UnityEngine.UI;
 using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
 
 public class MoneyUI : MonoBehaviour {
 
-	public Text moneyText;
+    public Text moneyText;
 
-	// Update is called once per frame
-	void Update () {
-		moneyText.text = "$" + PlayerStats.Money.ToString();
+    //Setting the Money to its value from PlayerStats
+    void Update () {
+        moneyText.text = "$" + PlayerStats.Money;
 	}
 }

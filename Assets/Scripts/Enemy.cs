@@ -1,60 +1,51 @@
+﻿
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour {
 
-	public float startSpeed = 10f;
+    public float speed = 10f;
+    private Transform target;
+    private int waypointindex = 0;
 
-	[HideInInspector]
-	public float speed;
 
-	public float startHealth = 100;
-	private float health;
+    private void Start()
+    {
+        //Giving the enemy its first waypoint to path to
+        target = Waypoints.points[0];
+    }
 
-	public int worth = 50;
+    private void Update()
+    {
+        //Getting the distance to the next waypoint
+        Vector3 dir=target.position-transform.position;
+        //Moving towards the next waypoint with a set amount of speed
+        transform.Translate(dir.normalized*speed*Time.deltaTime,Space.World);
 
-	public GameObject deathEffect;
+        //When the enemy object reaches the waypoint give it the next waypoint
+        if (Vector3.Distance(transform.position, target.position) <= 0.2f)
+        {
+            Getnextwaypoint();
+        }
 
-	[Header("Unity Stuff")]
-	public Image healthBar;
+    }
 
-	private bool isDead = false;
+    void Getnextwaypoint()
+        //supply the caller with the next waypoint
+        //if there is none call EndPath
+    {
+        if (waypointindex >= Waypoints.points.Length - 1)
+        {
+            EndPath();
+            return;
+        }
+        waypointindex++;
+        target = Waypoints.points[waypointindex];
+    }
 
-	void Start ()
-	{
-		speed = startSpeed;
-		health = startHealth;
-	}
-
-	public void TakeDamage (float amount)
-	{
-		health -= amount;
-
-		healthBar.fillAmount = health / startHealth;
-
-		if (health <= 0 && !isDead)
-		{
-			Die();
-		}
-	}
-
-	public void Slow (float pct)
-	{
-		speed = startSpeed * (1f - pct);
-	}
-
-	void Die ()
-	{
-		isDead = true;
-
-		PlayerStats.Money += worth;
-
-		GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
-		Destroy(effect, 5f);
-
-		WaveSpawner.EnemiesAlive--;
-
-		Destroy(gameObject);
-	}
-
+    void EndPath()
+    {
+        //Remove a life from the player and destroy the caller
+        PlayerStats.Lives--;
+        Destroy(gameObject);
+    }
 }
