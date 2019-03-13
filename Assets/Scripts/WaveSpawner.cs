@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class Wavespawner : MonoBehaviour {
+public class WaveSpawner : MonoBehaviour {
 
 
     public Transform enemyPrefab;

@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour {
     public GameObject smallImpactEffect;
     public float explossionRadius = 0f;
     public float speed=70f;
+    public int damage = 50;
 
     public void Seek(Transform _target)
     {
@@ -49,14 +50,19 @@ public class Bullet : MonoBehaviour {
         {
             Damage(target);
         }
-        Destroy(target.gameObject);
+        //Destroy(target.gameObject);
         Destroy(gameObject);
     }
 
     void Damage(Transform enemy)
     {
-        Destroy(enemy.gameObject);
+        Enemy e = enemy.GetComponent<Enemy>();
+        if (e != null)
+        {
+            e.TakeDamage(damage);
+        }
     }
+
     void Explode()
     {
         Collider[] colliders =Physics.OverlapSphere(transform.position,explossionRadius);//makes a sphere and returns all the objects that collides with the sphere
