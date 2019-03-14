@@ -18,7 +18,7 @@ public class BuildManager : MonoBehaviour {
     }
 
     private TurretBlueprint turretToBuild;
-
+    private Node selectedNode;
 
     public GameObject buildEffect;
 
@@ -29,8 +29,13 @@ public class BuildManager : MonoBehaviour {
     public void SelectTurretToBuild(TurretBlueprint turret)
     {
         turretToBuild = turret;
+        selectedNode = null;
     }
-
+    public void selectNode (Node node)
+    {
+        selectedNode = node;
+        turretToBuild = null;
+    }
     public void BuildTurretOn(Node node)
     {
         if (PlayerStats.Money < turretToBuild.cost)

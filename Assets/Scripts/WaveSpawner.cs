@@ -35,6 +35,7 @@ public class WaveSpawner : MonoBehaviour {
         //Spawning enemies based on the number of waves completed
         //Enemies spawn with an interval of 0.5 seconds
         waveIndex++;
+        PlayerStats.Waves++;
         for (int i = 0; i < waveIndex; i++)
         {
             SpawnEnemy();
