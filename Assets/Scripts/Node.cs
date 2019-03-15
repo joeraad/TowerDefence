@@ -33,7 +33,7 @@ public class Node : MonoBehaviour {
 
         if (turret != null)
         {
-            buildManager.selectNode(this);
+            buildManager.SelectNode(this);
             return;
         }
 
