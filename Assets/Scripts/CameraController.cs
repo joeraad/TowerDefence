@@ -17,14 +17,13 @@ public class CameraController : MonoBehaviour {
             this.enabled = false;
             return;
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+
+        if (Input.GetKeyDown("h"))
         {
             doMovement = !doMovement;
         }
         if (!doMovement)
-        {
             return;
-        }
 
         if (Input.GetKey("w") || (Input.mousePosition.y >= (Screen.height - panBorderThickness)))
         {
