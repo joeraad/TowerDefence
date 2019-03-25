@@ -46,6 +46,7 @@ public class EnemyMovement : MonoBehaviour
     {
         //Remove a life from the player and destroy the caller
         PlayerStats.Lives--;
+        WaveSpawner.enemiesAlive--;
         Destroy(gameObject);
     }
 }
